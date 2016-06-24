@@ -92,8 +92,11 @@ set nu
 map <C-n> :NERDTreeToggle<cr> 
 nnoremap <C-t> :call NumberToggle()<cr>
 
-" Mapping for running python code using F9
-autocmd FileType python nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
+" Mapping for running python code using CTRL+m
+autocmd FileType python nnoremap <buffer> <C-m> :exec '!python' shellescape(@%, 1)<cr>
+
+" Automatically insert ipdb debug line
+:map <C-i> oimport ipdb; ipdb.set_trace() <esc>
 
 " Let terminal use 256 colors
 let &t_Co=256
