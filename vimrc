@@ -23,14 +23,13 @@ filetype plugin indent on    " required
 """ Vundle setup done
 
 """ Plugins (Install with :PluginInstall in vim)
-Plugin 'tmhedberg/SimpylFold'
-Plugin 'vim-scripts/indentpython.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'nvie/vim-flake8'
-Plugin 'jnurmine/Zenburn'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'tmhedberg/SimpylFold'			" folding of code
+Plugin 'vim-scripts/indentpython.vim'		" Indent smarter
+Plugin 'scrooloose/syntastic'			" Check syntax every time you save
+Plugin 'nvie/vim-flake8'			" Should do pep8 checks
+Plugin 'jnurmine/Zenburn'			" Terminal mode colors
+Plugin 'scrooloose/nerdtree'			" File tree
+Plugin 'jistr/vim-nerdtree-tabs'		" Tabs in the file tree
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Bundle "myusuf3/numbers.vim"
 Bundle 'klen/python-mode'
@@ -52,8 +51,8 @@ nnoremap <space> za
 " See docstrings for folded code
 let g:SimpylFold_docstring_preview=1
 
-" Indentation for python
-au BufNewFile,BufRead *.py
+" Indentation for python and bash scripts
+au BufNewFile,BufRead *.py 
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
@@ -62,11 +61,20 @@ au BufNewFile,BufRead *.py
     \ set autoindent |
     \ set fileformat=unix 
 
+au BufNewFile,BufRead *.sh 
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=150 |
+
 " Flag unnecessary whitespace
 "au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 " UTF-8 support
 set encoding=utf-8
+
+" flake8 settings
+let g:syntastic_python_flake8_args='--ignore=E501'
 
 " Syntax highlighting python
 let python_highlight_all=1
@@ -79,9 +87,6 @@ if has('gui_running')
 else
   colorscheme zenburn
 endif
-
-" Switch between color schemes
-call togglebg#map("<F5>")
 
 " Hide .pyc files in file browser
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
@@ -97,6 +102,9 @@ nnoremap <C-t> :call NumberToggle()<cr>
 "autocmd FileType python nnoremap <buffer> <C-m> :w<CR>:exec '!python' shellescape(@%, 1)<cr>
 autocmd FileType python nnoremap <buffer> <C-m> :w<CR>:!python ./%<cr>
 
+" Mapping for running shell code using CTRL+m
+autocmd FileType sh nnoremap <buffer> <C-m> :w<CR>:!./%<cr>
+
 " Automatically insert ipdb debug line
 :map <C-i> oimport ipdb; ipdb.set_trace(context=10) <esc>
 
@@ -106,6 +114,9 @@ let &t_Co=256
 " Toggles for line numbers
 nnoremap <F3> :NumbersToggle<CR>
 nnoremap <F4> :NumbersOnOff<CR>
+
+" Display powerline always
+set laststatus=2
 
 " Python-mode
 " " Activate rope
@@ -128,7 +139,7 @@ nnoremap <F4> :NumbersOnOff<CR>
 let g:pymode_rope = 1
 
 " Documentation
-let g:pymode_doc = 1
+let g:pymode_doc = 0
 let g:pymode_doc_key = 'K'
 
 " Linting
@@ -136,6 +147,7 @@ let g:pymode_lint = 1
 let g:pymode_lint_checker = "pyflakes,pep8"
 " Auto check on save
 let g:pymode_lint_write = 1
+let g:pymode_lint_ignore = "E501"
 
 " Support virtualenv
 let g:pymode_virtualenv = 1
@@ -145,10 +157,10 @@ let g:pymode_breakpoint = 1
 let g:pymode_breakpoint_bind = '<leader>b'
 
 " syntax highlighting
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-let g:pymode_syntax_space_errors = g:pymode_syntax_all
+"let g:pymode_syntax = 1
+"let g:pymode_syntax_all = 1
+"let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+"let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
 " Don't autofold code
-let g:pymode_folding = 0
+let g:pymode_folding = 1
