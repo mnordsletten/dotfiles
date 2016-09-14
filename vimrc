@@ -111,6 +111,9 @@ autocmd FileType sh nnoremap <buffer> <C-m> :w<CR>:!./%<cr>
 " Let terminal use 256 colors
 let &t_Co=256
 
+" Prevent documentation window from popping up
+set completeopt=menu
+
 " Toggles for line numbers
 nnoremap <F3> :NumbersToggle<CR>
 nnoremap <F4> :NumbersOnOff<CR>
