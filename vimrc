@@ -31,10 +31,16 @@ Plugin 'jnurmine/Zenburn'			" Terminal mode colors
 Plugin 'scrooloose/nerdtree'			" File tree
 Plugin 'jistr/vim-nerdtree-tabs'		" Tabs in the file tree
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'tpope/vim-fugitive'			" Adds git commands
 Bundle "myusuf3/numbers.vim"
 Bundle 'klen/python-mode'
 
 
+" Allow mouse scrolling vim + iterm2
+set mouse=a
+
+" Use jj to act as <esc>
+:imap jj <Esc>
 
 
 "split navigations
@@ -139,7 +145,7 @@ set laststatus=2
 " " ]M            Jump on next class or method (normal, visual, operator
 " modes)
 
-let g:pymode_rope = 1
+let g:pymode_rope = 0
 
 " Documentation
 let g:pymode_doc = 0
