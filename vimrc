@@ -173,3 +173,6 @@ let g:pymode_breakpoint_bind = '<leader>b'
 
 " Don't autofold code
 let g:pymode_folding = 1
+
+" Don't close split when closing a buffer
+map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>. 
