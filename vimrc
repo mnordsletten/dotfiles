@@ -176,3 +176,4 @@ let g:pymode_folding = 1
 
 " Don't close split when closing a buffer
 map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>. 
+nnoremap <C-c> :bp\|bd #<CR>
